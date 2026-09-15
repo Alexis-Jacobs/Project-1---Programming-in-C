@@ -120,6 +120,5 @@ void exit_program(StudentList *list){
         free(temp);
         temp = next;
     }
-    free(list);
     return;
 }
