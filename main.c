@@ -16,6 +16,8 @@ int main() {
     int choice;
     int Continue = 1;
     while(Continue == 1){
+        printf("\n");
+        printf("-------------------------------\n");
         printf("Choose one option from below\n");
         printf("1. Add a student\n");
         printf("2. Remove a student\n");
@@ -49,7 +51,7 @@ int main() {
             fgets(buffer, BUFFERSIZE, stdin);
             student.id = atol(buffer); //convert string to long and assign to student.id
 
-            printf("Enter year: ");
+            printf("Enter year (Freshman, Senior, Graduate, etc.): ");
             fgets(buffer, BUFFERSIZE, stdin);
             buffer[strcspn(buffer, "\n")] = 0; //remove newline character
             student.year = strdup(buffer); //duplicate string and assign to student.year
@@ -69,7 +71,7 @@ int main() {
         } else if(choice == 4){
             print_backwards(&list); //print all students in list backwards
         } else if(choice == 5){
-            exit(&list); //exit program
+            exit_program(&list); //exit program
             Continue = 0; //set Continue to 0 to exit loop
         } else {
             printf("Invalid choice\n");

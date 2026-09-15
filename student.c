@@ -42,14 +42,14 @@ void add_student(StudentList *list, Student student){
         list->tail = new_student;
         list->size++;
     }
-    return 0;
+    return;
 }
 
 void remove_student(StudentList *list, char *lastname){
     //rmove student from the list, depending on where it is in the list. Deallocated memory for that student in the list.
     if(list->head == NULL){
         printf("List is empty\n");
-        return 0;
+        return;
     }else{
         Student *temp = list->head;
         while(temp != NULL){
@@ -79,38 +79,40 @@ void remove_student(StudentList *list, char *lastname){
         }
         //printf("Student not found\n");
     }
-    return 0;
+    return;
 }
 
 void print_students(StudentList *list){
     //prints all students in the list starting at the head going to the tail
     if(list->head == NULL){
         printf("List is empty\n");
-        return 0;
+        return;
     }else{
+         Student *temp = list->head;
         for(int i=0; i<list->size; i++){
-            Student *temp = list->head;
             print_student(temp);
+            printf("\n");
             temp = temp->next;
         }
     }
-    return 0;
+    return;
 }
 void print_backwards(StudentList *list){
     //prints all students in the list starting at the tail going to the head
     if(list->tail == NULL){
         printf("List is empty\n");
-        return 0;
+        return;
     }else{
+        Student *temp = list->tail;
         for(int i=0; i<list->size; i++){
-            Student *temp = list->tail;
             print_student(temp);
+            printf("\n");
             temp = temp->prev;
         }
     }
-    return 0;
+    return;
 }
-void exit(StudentList *list){
+void exit_program(StudentList *list){
     //deallocate all memory for the list and all students in the list, then free the list itself.
     Student *temp = list->head;
     while(temp != NULL){
@@ -119,5 +121,5 @@ void exit(StudentList *list){
         temp = next;
     }
     free(list);
-    return 0;
+    return;
 }
