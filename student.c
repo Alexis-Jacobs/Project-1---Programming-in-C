@@ -4,6 +4,8 @@
 #include "student.h"
 
 void print_student(Student *student){
+    //Simple function to print out all the information of a student.
+    //Included for the sake of printing forwards and backwards.
     printf("Last Name: %s\n", student->lastname);
     printf("First Name: %s\n", student->firstname);
     printf("ID: %ld\n", student->id);
@@ -12,6 +14,8 @@ void print_student(Student *student){
 }
 
 void add_student(StudentList *list, Student student){
+    //Allocate the correct memory for the new student, ensure the right amount is allocated, copy user-entered stuent information
+    //into the new student, and add the new student to the end of the list. If the list is empty, set the head and tail to the new student.
     Student *new_student = (Student*)malloc(sizeof(Student));
 
     if(new_student == NULL){
@@ -23,6 +27,11 @@ void add_student(StudentList *list, Student student){
 
     new_student->next=NULL;
     new_student->prev=list->tail;
+    new_student->lastname = strdup(student.lastname);
+    new_student->firstname = strdup(student.firstname);
+    new_student->year = strdup(student.year);
+    new_student->id = student.id;
+    new_student->grad_year = student.grad_year;
 
     if(list->head == NULL){
         list->head = new_student;
@@ -37,6 +46,7 @@ void add_student(StudentList *list, Student student){
 }
 
 void remove_student(StudentList *list, char *lastname){
+    //rmove student from the list, depending on where it is in the list. Deallocated memory for that student in the list.
     if(list->head == NULL){
         printf("List is empty\n");
         return 0;
@@ -73,6 +83,7 @@ void remove_student(StudentList *list, char *lastname){
 }
 
 void print_students(StudentList *list){
+    //prints all students in the list starting at the head going to the tail
     if(list->head == NULL){
         printf("List is empty\n");
         return 0;
@@ -86,6 +97,7 @@ void print_students(StudentList *list){
     return 0;
 }
 void print_backwards(StudentList *list){
+    //prints all students in the list starting at the tail going to the head
     if(list->tail == NULL){
         printf("List is empty\n");
         return 0;
@@ -99,6 +111,7 @@ void print_backwards(StudentList *list){
     return 0;
 }
 void exit(StudentList *list){
+    //deallocate all memory for the list and all students in the list, then free the list itself.
     Student *temp = list->head;
     while(temp != NULL){
         Student *next = temp->next;

@@ -75,6 +75,5 @@ int main() {
             printf("Invalid choice\n");
         }
     }
-    free(buffer); //free buffer memory
     return 0;
 }
