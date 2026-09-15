@@ -65,16 +65,19 @@ void remove_student(StudentList *list, char *lastname){
                 }else{
                     list->tail = temp->prev;
                 }
-                free(temp->lastname);
-                free(temp->firstname);
-                free(temp->year);
-                free(temp);
+                Student *found = temp;
                 list->size--;
-                return 0;
+                temp = temp->next;
+                free(found->lastname);
+                free(found->firstname);
+                free(found->year);
+                free(found);
+                break;
+                //return 0;
             }
             temp = temp->next;
         }
-        printf("Student not found\n");
+        //printf("Student not found\n");
     }
     return 0;
 }
