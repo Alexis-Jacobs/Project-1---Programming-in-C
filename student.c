@@ -47,37 +47,36 @@ void add_student(StudentList *list, Student student){
 
 void remove_student(StudentList *list, char *lastname){
     //rmove student from the list, depending on where it is in the list. Deallocated memory for that student in the list.
+    Student *temp = list->head;
     if(list->head == NULL){
         printf("List is empty\n");
         return;
     }else{
-        Student *temp = list->head;
         while(temp != NULL){
+            Student *nextStd = temp->next;
             if(strcmp(temp->lastname, lastname) == 0){
-                if(temp->prev != NULL && temp->next != NULL){
+                //connect the previous and next students together, if they exist. If not, set the head or tail to the next or previous student.
+                printf("Removing student: %s %s\n", temp->firstname, temp->lastname);
+                if(temp-> prev != NULL){
                     temp->prev->next = temp->next;
-                    temp->next->prev = temp->prev;
+                }else{
+                    list->head = temp->next;
+                    //temp->next->prev = NULL;
                 }
-                else if(temp->prev != NULL){
-                    temp->prev->next = temp->next;
-                }else if(temp->next != NULL){
+                if(temp->next != NULL){
                     temp->next->prev = temp->prev;
                 }else{
                     list->tail = temp->prev;
+                    //temp->prev->next = NULL;
                 }
-                Student *found = temp;
+                free(temp->lastname);
+                free(temp->firstname);
+                free(temp->year);
+                free(temp);
                 list->size--;
-                temp = temp->next;
-                free(found->lastname);
-                free(found->firstname);
-                free(found->year);
-                free(found);
-                break;
-                //return 0;
             }
-            temp = temp->next;
+            temp = nextStd;
         }
-        //printf("Student not found\n");
     }
     return;
 }
