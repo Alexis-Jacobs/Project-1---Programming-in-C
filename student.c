@@ -3,8 +3,99 @@
 #include <string.h>
 #include "student.h"
 
-void add_student(StudentList *list, Student student);
-void remove_student(StudentList *list, char *lastname);
-void print_students(StudentList *list);
-void print_backwards(StudentList *list);
-void exit();
+void print_student(Student *student){
+    printf("Last Name: %s\n", student->lastname);
+    printf("First Name: %s\n", student->firstname);
+    printf("ID: %ld\n", student->id);
+    printf("Year: %s\n", student->year);
+    printf("Graduation Year: %d\n", student->grad_year);
+}
+
+void add_student(StudentList *list, Student student){
+    if(list->head == NULL){
+        list->head = (Student*)malloc(sizeof(Student));
+        list->head = &student;
+        list->head->next = NULL;
+        list->head->prev = NULL;
+        list->tail = list->head;
+        list->size = 1;
+    } else {
+        Student *new_student = (Student*)malloc(sizeof(Student));
+        new_student->next = NULL;
+        new_student->prev = list->tail;
+        list->tail->next = new_student;
+        list->tail = new_student;
+        list->size++;
+    }
+    return 0;
+}
+
+void remove_student(StudentList *list, char *lastname){
+    if(list->head == NULL){
+        printf("List is empty\n");
+        return 0;
+    }else{
+        Student *temp = list->head;
+        while(temp != NULL){
+            if(strcmp(temp->lastname, lastname) == 0){
+                if(temp->prev != NULL){
+                    temp->prev->next = temp->next;
+                    temp->next->prev = temp->prev;
+                }else{
+                    list->head = temp->next;
+                    temp->next->prev = NULL;
+                }
+                if(temp->next != NULL){
+                    temp->next->prev = temp->prev;
+                    temp->prev->next = temp->next;
+                }else{
+                    list->tail = temp->prev;
+                    temp->prev->next = NULL;
+                }
+                free(temp);
+                list->size--;
+                return 0;
+            }
+            temp = temp->next;
+        }
+        printf("Student not found\n");
+    }
+    return 0;
+}
+
+void print_students(StudentList *list){
+    if(list->head == NULL){
+        printf("List is empty\n");
+        return 0;
+    }else{
+        for(int i=0; i<list->size; i++){
+            Student *temp = list->head;
+            print_student(temp);
+            temp = temp->next;
+        }
+    }
+    return 0;
+}
+void print_backwards(StudentList *list){
+    if(list->tail == NULL){
+        printf("List is empty\n");
+        return 0;
+    }else{
+        for(int i=0; i<list->size; i++){
+            Student *temp = list->tail;
+            print_student(temp);
+            temp = temp->prev;
+        }
+    }
+    return 0;
+}
+void exit(StudentList *list){
+    Student *temp = list->head;
+    while(temp != NULL){
+        Student *next = temp->next;
+        free(temp);
+        temp = next;
+    }
+    free(list);
+    return 0;
+}
