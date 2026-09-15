@@ -18,10 +18,10 @@ void add_student(StudentList *list, Student student){
     //into the new student, and add the new student to the end of the list. If the list is empty, set the head and tail to the new student.
     Student *new_student = (Student*)malloc(sizeof(Student));
 
-    if(new_student == NULL){
-        printf("Memory allocation failed\n");
-        return 0;
-    }
+    // if(new_student == NULL){
+    //     printf("Memory allocation failed\n");
+    //     return 0;
+    // }
 
     *new_student = student;
 
