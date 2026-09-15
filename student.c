@@ -12,17 +12,23 @@ void print_student(Student *student){
 }
 
 void add_student(StudentList *list, Student student){
+    Student *new_student = (Student*)malloc(sizeof(Student));
+
+    if(new_student == NULL){
+        printf("Memory allocation failed\n");
+        return 0;
+    }
+
+    *new_student = student;
+
+    new_student->next=NULL;
+    new_student->prev=list->tail;
+
     if(list->head == NULL){
-        list->head = (Student*)malloc(sizeof(Student));
-        list->head = &student;
-        list->head->next = NULL;
-        list->head->prev = NULL;
-        list->tail = list->head;
+        list->head = new_student;
+        list->tail = new_student;
         list->size = 1;
     } else {
-        Student *new_student = (Student*)malloc(sizeof(Student));
-        new_student->next = NULL;
-        new_student->prev = list->tail;
         list->tail->next = new_student;
         list->tail = new_student;
         list->size++;
@@ -52,6 +58,9 @@ void remove_student(StudentList *list, char *lastname){
                     list->tail = temp->prev;
                     temp->prev->next = NULL;
                 }
+                free(temp->lastname);
+                free(temp->firstname);
+                free(temp->year);
                 free(temp);
                 list->size--;
                 return 0;
