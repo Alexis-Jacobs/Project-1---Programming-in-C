@@ -54,19 +54,16 @@ void remove_student(StudentList *list, char *lastname){
         Student *temp = list->head;
         while(temp != NULL){
             if(strcmp(temp->lastname, lastname) == 0){
-                if(temp->prev != NULL){
+                if(temp->prev != NULL && temp->next != NULL){
                     temp->prev->next = temp->next;
                     temp->next->prev = temp->prev;
-                }else{
-                    list->head = temp->next;
-                    temp->next->prev = NULL;
                 }
-                if(temp->next != NULL){
-                    temp->next->prev = temp->prev;
+                else if(temp->prev != NULL){
                     temp->prev->next = temp->next;
+                }else if(temp->next != NULL){
+                    temp->next->prev = temp->prev;
                 }else{
                     list->tail = temp->prev;
-                    temp->prev->next = NULL;
                 }
                 free(temp->lastname);
                 free(temp->firstname);
