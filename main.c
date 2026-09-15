@@ -14,8 +14,8 @@ int main() {
 
     char buffer[BUFFERSIZE];
     int choice;
-
-    while(1){
+    int Continue = 1;
+    while(Continue == 1){
         printf("Choose one option from below\n");
         printf("1. Add a student\n");
         printf("2. Remove a student\n");
@@ -70,11 +70,11 @@ int main() {
             print_backwards(&list); //print all students in list backwards
         } else if(choice == 5){
             exit(&list); //exit program
+            Continue = 0; //set Continue to 0 to exit loop
         } else {
             printf("Invalid choice\n");
         }
-
-
     }
+    free(buffer); //free buffer memory
     return 0;
 }
