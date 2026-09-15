@@ -4,8 +4,8 @@ typedef struct Student {
   long id;
   char *year; 
   int grad_year; 
-  struct student *next;
-  struct student *prev;
+  struct Student *next;
+  struct Student *prev;
 } Student;
 
 typedef struct StudentList {
@@ -14,6 +14,7 @@ typedef struct StudentList {
   int size;
 } StudentList;
 
+void print_student(Student *student);
 void add_student(StudentList *list, Student student);
 void remove_student(StudentList *list, char *lastname);
 void print_students(StudentList *list);
