@@ -14,19 +14,20 @@ void print_student(Student *student){
 }
 
 void add_student(StudentList *list, Student student){
-    //Allocate the correct memory for the new student, ensure the right amount is allocated, copy user-entered stuent information
-    //into the new student, and add the new student to the end of the list. If the list is empty, set the head and tail to the new student.
+    //Allocate the correct memory for the new student, ensure the right amount is allocated,
+    //set pointer to match user-inputted data and add the new student to the end of the list.
+    // If the list is empty, set the head and tail to the new student.
     Student *new_student = (Student*)malloc(sizeof(Student));
 
     *new_student = student;
 
     new_student->next=NULL;
     new_student->prev=list->tail;
-    new_student->lastname = strdup(student.lastname);
-    new_student->firstname = strdup(student.firstname);
-    new_student->year = strdup(student.year);
-    new_student->id = student.id;
-    new_student->grad_year = student.grad_year;
+    // new_student->lastname = strdup(student.lastname);
+    // new_student->firstname = strdup(student.firstname);
+    // new_student->year = strdup(student.year);
+    // new_student->id = student.id;
+    // new_student->grad_year = student.grad_year;
 
     if(list->head == NULL){
         list->head = new_student;
