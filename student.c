@@ -113,8 +113,14 @@ void exit_program(StudentList *list){
     Student *temp = list->head;
     while(temp != NULL){
         Student *next = temp->next;
+        free(temp->lastname);
+        free(temp->firstname);
+        free(temp->year);
         free(temp);
         temp = next;
     }
+    list->head = NULL;
+    list->tail = NULL;
+    list->size = 0;
     return;
 }
