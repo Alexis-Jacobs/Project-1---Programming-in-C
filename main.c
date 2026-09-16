@@ -16,6 +16,8 @@ int main() {
     int choice;
     int Continue = 1;
     while(Continue == 1){
+        //Print statements are for user interface, to display options to the user 
+        //and establish what the user can do/ make the program look pretty
         printf("\n");
         printf("-------------------------------\n");
         printf("Choose one option from below\n");
@@ -36,6 +38,7 @@ int main() {
         choice = atoi(buffer); //convert string to integer
 
         if(choice == 1){
+            //If user chooses to add a student, prompt user for student information and store in new student struct
             Student student;
             printf("Enter last name: ");
             fgets(buffer, BUFFERSIZE, stdin);
@@ -62,18 +65,23 @@ int main() {
 
             add_student(&list, student); //add student to list
         } else if(choice == 2){
+            //If remove student is selected, get the last name of the student that the user wishes to remove
             printf("Enter last name of student to remove: ");
             fgets(buffer, BUFFERSIZE, stdin);
             buffer[strcspn(buffer, "\n")] = 0; //remove newline character
             remove_student(&list, buffer); //remove student from list
         } else if(choice == 3){
+            //if print is chosen, call print students
             print_students(&list); //print all students in list
         } else if(choice == 4){
+            //if print backwards is chosen, call print backwards
             print_backwards(&list); //print all students in list backwards
         } else if(choice == 5){
+            //if exit is chosen, call exit program and set Continue to 0 to exit loop
             exit_program(&list); //exit program
             Continue = 0; //set Continue to 0 to exit loop
         } else {
+            //if user enters an invalid choice, print error message
             printf("Invalid choice\n");
         }
     }
