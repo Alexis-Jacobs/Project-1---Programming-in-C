@@ -1,3 +1,4 @@
+//node variables included in student struct
 typedef struct Student {
   char *lastname;
   char *firstname;

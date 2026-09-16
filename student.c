@@ -18,11 +18,6 @@ void add_student(StudentList *list, Student student){
     //into the new student, and add the new student to the end of the list. If the list is empty, set the head and tail to the new student.
     Student *new_student = (Student*)malloc(sizeof(Student));
 
-    // if(new_student == NULL){
-    //     printf("Memory allocation failed\n");
-    //     return 0;
-    // }
-
     *new_student = student;
 
     new_student->next=NULL;
@@ -53,6 +48,8 @@ void remove_student(StudentList *list, char *lastname){
         return;
     }else{
         while(temp != NULL){
+            //use a temporary variable for the next student in the list, so the function gets rid of 
+            //all students with the last name, not just the first student with the last name
             Student *nextStd = temp->next;
             if(strcmp(temp->lastname, lastname) == 0){
                 //connect the previous and next students together, if they exist. If not, set the head or tail to the next or previous student.
