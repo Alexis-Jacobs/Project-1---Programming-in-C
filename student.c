@@ -16,7 +16,7 @@ void print_student(Student *student){
 void add_student(StudentList *list, Student student){
     //Allocate the correct memory for the new student, ensure the right amount is allocated,
     //set pointer to match user-inputted data and add the new student to the end of the list.
-    // If the list is empty, set the head and tail to the new student.
+    //If the list is empty, set the head and tail to the new student.
     Student *new_student = (Student*)malloc(sizeof(Student));
 
     *new_student = student;
