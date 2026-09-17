@@ -41,7 +41,7 @@ int main() {
             //If user chooses to add a student, prompt user for student information and store in new student struct
             Student student;
             printf("Enter last name: ");
-            fgets(buffer, BUFFERSIZE, stdin);
+            fgets(buffer, BUFFERSIZE, stdin); //This line was asissted by ChatGPT 5.6, prompt "Can you explain how fgets() works in C?"
             buffer[strcspn(buffer, "\n")] = 0; //remove newline character
             student.lastname = strdup(buffer); //duplicate string and assign to student.lastname
 

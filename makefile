@@ -9,3 +9,5 @@ student.o: student.c student.h
 
 clean:
 	rm -f *.o slist
+
+# Written with the assiatance of ChatGPT 5.6, Prompt used: "can you remind me how a makefile works?"
